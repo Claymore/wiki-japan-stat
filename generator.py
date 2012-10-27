@@ -32,7 +32,7 @@ for code in config.sections():
     with open('codes.csv', 'rb') as f:
         reader = unicode_csv_reader(f, delimiter='\t')
         for row in reader:
-            if row[0].startswith(code[3:2]):
+            if row[0].startswith(code[3:]):
                 codes[row[2]] = row[0]
                 ja_prefecture_name = row[1]
 
