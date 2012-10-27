@@ -43,13 +43,16 @@ for code in config.sections():
         municipalities = 0
         reader = unicode_csv_reader(fr)
         for row in reader:
-            name = row[name_column_id].strip()
+            name = row[name_column_id].strip().replace(' ', '')
             population = row[population_column_id].strip()
             if not population.isnumeric():
                 continue
             if name == total_name:
                 fw.write(u'  |%s   = %s\n' % (code, population))
             if name.endswith(u'市') or name.endswith(u'町') or name.endswith(u'村'):
+                if not name in codes:
+                    print '[warning] Skipping %s %s' % (code, name)
+                    continue
                 fw.write('  |%s = %7s <!-- %s -->\n' % (codes[name], population, name))
                 municipalities = municipalities + 1
         fw.write(u'  |муниципалитетов = %d\n' % (municipalities))
