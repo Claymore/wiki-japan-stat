@@ -1,7 +1,7 @@
 package main
 
 import (
-    "./config"
+    "github.com/Claymore/go-config/config"
     "encoding/csv"
     "fmt"
     "io"
